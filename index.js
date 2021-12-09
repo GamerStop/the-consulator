@@ -20,7 +20,7 @@ app.post('/', (req, res) => {
     // Authentication
     var msg
     Credentials.countDocuments({ key : req.query.key }, (err, count) => {if (count === 1) {msg = 'authenticated'} else {msg = 'bad credentials'}})
-    res.status(200).send({msg:msg})
+    res.status(200).json({msg:msg})
 })
 
 // Listen
