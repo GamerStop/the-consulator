@@ -9,7 +9,7 @@ app.use(express.json());
 // DB Models
 const Credentials = require('./models/credentials')
 
-// DB Connection
+// MongoDB Connection
 mongoose
     .connect(require('./config/keys').mongoURI,{ useNewUrlParser: true ,useUnifiedTopology: true, useFindAndModify: false})
     .then(() => console.log('MongoDB Connected, localhost:8080. - ' + new Date()))
