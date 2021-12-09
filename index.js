@@ -3,6 +3,9 @@ const mongoose = require('mongoose')
 const express = require('express')
 const app = express();
 
+// Animals
+var catFacts = require('./api-data/animals/cat-facts.js').data
+
 // Middleware
 app.use(express.json());
 
@@ -15,11 +18,12 @@ mongoose
     .then(() => console.log('MongoDB Connected, localhost:8080. - ' + new Date()))
     .catch(err => console.log(err));
 
-// Basic Route
-app.post('/', (req, res) => {
-    // Authentication
-    Credentials.countDocuments({ key : req.query.key }, (err, count) => {if (count === 1) {res.json({message:'authenticated'})} else {res.json({message:'bad credentials'})}})
-})
+// Authentication Test
+app.post('/api/', (req, res) => { Credentials.countDocuments({ key : req.query.key }, (err, count) => {if (count === 1) {res.json({message:'authenticated'})} else {res.json({message:'bad credentials'})}})}) 
+
+// ----======= Animals Routes =======----
+
+app.post('/api/animals/cat-facts/', (req, res) => {Credentials.countDocuments({ key : req.query.key }, (err, count) => {if (count === 1) {res.json({data : catFacts[Math.floor(Math.random() * catFacts.length)]})} else {res.json({message:'bad credentials'})}})})
 
 // Listen
 app.listen(8080)
