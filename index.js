@@ -18,7 +18,9 @@ mongoose
 // Basic Route
 app.post('/', (req, res) => {
     // Authentication
-    Credentials.countDocuments({ key : req.query.key }, (err, count) => {if (count === 1) {res.status(200).send("authenticated")} else {res.status(200).send("bad credentials")}}) 
+    var msg
+    Credentials.countDocuments({ key : req.query.key }, (err, count) => {if (count === 1) {msg = 'authenticated'} else {msg = 'bad credentials'}})
+    res.status(200).send({msg:msg})
 })
 
 // Listen
